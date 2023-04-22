@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Key } from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useState } from 'react';
@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { addTask } from '../store/tasksSlice';
 
 export interface Itask  {
-    id: String,
+    id: React.Key,
     taskName: String,
     date: String,
     completed: Boolean
@@ -24,7 +24,7 @@ export const Input = (): JSX.Element => {
     const numbers: String = '0123456789'
     const letters: String = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
-    function generateRandomId(n: number) {
+    const generateRandomId = (n: number) => {
         let result = '';
         for (let i = 0; i < n; i++) {
           const randomNum = Math.floor(Math.random() * numbers.length);
@@ -33,7 +33,6 @@ export const Input = (): JSX.Element => {
         }
         return result;
     }
-
 
     const addTaskToRedux = (name: String, date: String) =>{
         const newTask = { id: generateRandomId(10), taskName: name, date: date, completed: false };
